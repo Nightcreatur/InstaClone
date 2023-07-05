@@ -1,24 +1,41 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:insta/auth/auth_method.dart';
 import 'package:insta/utils/colors.dart';
+import 'package:insta/utils/utils.dart';
 import 'package:insta/widgets/text_field.dart';
 
-class LogInScreen extends StatefulWidget {
-  const LogInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passWordController = TextEditingController();
+  final _userNameController = TextEditingController();
+  final _bioController = TextEditingController();
+  Uint8List? _image;
+
+  void selectImage() async {
+    Uint8List im = await pickImage(ImageSource.gallery);
+
+    setState(() {
+      _image = im;
+    });
+  }
 
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passWordController.dispose();
+    _bioController.dispose();
+    _userNameController.dispose();
   }
 
   @override
@@ -45,7 +62,42 @@ class _LogInScreenState extends State<LogInScreen> {
             const SizedBox(
               height: 64,
             ),
-
+            Stack(
+              children: [
+                _image != null
+                    ? CircleAvatar(
+                        radius: 64,
+                        backgroundImage: MemoryImage(_image!),
+                      )
+                    : CircleAvatar(
+                        radius: 64,
+                        child: Image.asset(
+                          'assets/images/user.png',
+                          color: Colors.white,
+                        ),
+                      ),
+                Positioned(
+                    bottom: -10,
+                    left: 80,
+                    child: IconButton(
+                      icon: const Icon(Icons.add_a_photo),
+                      onPressed: () {
+                        selectImage();
+                      },
+                    ))
+              ],
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            TextFieldInput(
+                controller: _userNameController,
+                hint: 'User Name',
+                textType: TextInputType.text,
+                isPass: false),
+            const SizedBox(
+              height: 24,
+            ),
             TextFieldInput(
                 controller: _emailController,
                 hint: 'Email',
@@ -62,8 +114,24 @@ class _LogInScreenState extends State<LogInScreen> {
             const SizedBox(
               height: 24,
             ),
+            TextFieldInput(
+                controller: _bioController,
+                hint: 'Bio',
+                textType: TextInputType.text,
+                isPass: false),
+            const SizedBox(
+              height: 24,
+            ),
             InkWell(
-              onTap: () {},
+              onTap: () async {
+                String res = await AuthMethod().signUpUser(
+                    email: _emailController.text,
+                    password: _passWordController.text,
+                    userName: _userNameController.text,
+                    bio: _bioController.text,
+                    file: _image!);
+                print(res);
+              },
               child: Container(
                 width: double.infinity,
                 alignment: Alignment.center,
@@ -75,7 +143,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         Radius.circular(4),
                       ),
                     )),
-                child: const Text('LogIn'),
+                child: const Text('SignUp'),
               ),
             ),
             const SizedBox(
@@ -85,16 +153,13 @@ class _LogInScreenState extends State<LogInScreen> {
               flex: 2,
               child: Container(),
             ),
-            // SizedBox(
-            //   height: mq.height * .25,
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: const Text(
-                    "Don't have a account?",
+                    "Already have an account?",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -103,7 +168,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: const Text(
-                      "SignUp.",
+                      "SignIn.",
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.white),
                     ),

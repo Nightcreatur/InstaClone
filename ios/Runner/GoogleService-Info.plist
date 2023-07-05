@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>613220255302-ll4j19bjdlnq60233nu2fjlvo88qnjqs.apps.googleusercontent.com</string>
+	<string>616819595111-3k2qj2n65llhpsb10cg0vsvd984p4ijp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.613220255302-ll4j19bjdlnq60233nu2fjlvo88qnjqs</string>
+	<string>com.googleusercontent.apps.616819595111-3k2qj2n65llhpsb10cg0vsvd984p4ijp</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCzoXCDmENugd_KizuSF8ziPkCxbGHwBzM</string>
+	<string>AIzaSyAvvE0db1xwDyRrdXgWM22Wu6rU-DZ_SlA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>613220255302</string>
+	<string>616819595111</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.dp</string>
+	<string>com.example.insta</string>
 	<key>PROJECT_ID</key>
-	<string>booktracker-7b1cc</string>
+	<string>instaclone-86ac6</string>
 	<key>STORAGE_BUCKET</key>
-	<string>booktracker-7b1cc.appspot.com</string>
+	<string>instaclone-86ac6.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:613220255302:ios:0af6af10ba0cadcdd32c47</string>
+	<string>1:616819595111:ios:191404001da37d3b5e01c2</string>
 </dict>
 </plist>
